@@ -1,0 +1,14 @@
+Firm Name: Ramadan
+Type: OOD
+VAT Registered: Yes
+Department Name: HR
+Years Active: 10 years
+Number of Employees: 1
+Employee Name: Jose
+EGN: 0123456789
+Experience: 7 years
+Work Hours: 8 hours
+Projects: Project1, 
+Department: HR
+
+
