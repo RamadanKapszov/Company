@@ -2,10 +2,12 @@
 #define FIRM_H
 
 #include "Department.h"
+#include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
 #include <stdexcept>
+
 using namespace std;
 
 class Firm {
@@ -30,9 +32,9 @@ public:
     void setDepartments(const vector<Department>& departments);
 
     void saveToFile(const string& filename) const;
+    void loadFromFile(const string& filename); // Add this line
 
     friend ostream& operator<<(ostream& os, const Firm& firm);
 };
 
 #endif
-

@@ -18,12 +18,32 @@ void Department::addEmployee(Employee* employee) {
     employeeCount = employees.size();
 }
 
+istream& operator>>(istream& is, Department& dept) {
+    getline(is, dept.name);
+    is >> dept.yearsActive;
+    is >> dept.employeeCount; // Assuming employeeCount is stored
+    is.ignore(); // To ignore the newline character after integer
+
+    // Read employees (assuming each employee is on a new line)
+    dept.employees.clear(); // Clear any previous employees
+    for (int i = 0; i < dept.employeeCount; ++i) {
+        Employee* emp = new Employee();
+        is >> *emp;  // Assuming Employee has an operator>> implemented
+        dept.addEmployee(emp);
+    }
+
+    return is;
+}
+
+
+
 ostream& operator<<(ostream& os, const Department& dept) {
-    os << "Department Name: " << dept.name << "\n"
-        << "Years Active: " << dept.yearsActive << " years\n"
-        << "Number of Employees: " << dept.employeeCount << "\n";
-    for (const auto& emp : dept.employees) {
-        os << *emp << "\n";
+    os << "Department Name: " << dept.getName() << "\n"
+        << "Years Active: " << dept.getYearsActive() << " years\n"
+        << "Number of Employees: " << dept.getEmployeeCount() << "\n";
+    for (const auto& emp : dept.getEmployees()) {
+        os << *emp << "\n"; // This will print the employee's details
     }
     return os;
 }
+

@@ -8,8 +8,10 @@ void displayMenu() {
     cout << "3. Add Employee\n";
     cout << "4. Display Firm\n";
     cout << "5. Save to File\n";
-    cout << "6. Exit\n";
+    cout << "6. Read from File\n";  
+    cout << "7. Exit\n";
 }
+
 
 int main() {
     Firm firm;
@@ -103,20 +105,35 @@ int main() {
             break;
         }
         case 4:{
-            cout << firm;
+            try {
+
+                cout << firm;
+            }
+            catch (const std::bad_alloc& e) {
+                std::cerr << "" << e.what() << std::endl;
+            }
             break;
         }
         case 5:
             try {
-                firm.saveToFile("firm_data.txt");
+                firm.saveToFile("firm_data.json");
                 cout << "Data saved to file successfully.\n";
             }
             catch (const exception& e) {
                 cerr << e.what() << "\n";
             }
             break;
-        case 6:
-            return 0;
+        case 6: {
+            try {
+                firm.loadFromFile("firm_data.json"); 
+                cout << "Data loaded from file successfully.\n";
+            }
+            catch (const exception& e) {
+                cerr << e.what() << "\n";
+            }
+            break;
+        }
+
         default:
             cout << "Invalid choice. Try again.\n";
         }

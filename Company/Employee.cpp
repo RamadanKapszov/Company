@@ -29,18 +29,39 @@ void Employee::validateData() {
     }
 }
 
+istream& operator>>(istream& is, Employee& emp) {
+    getline(is, emp.name);
+    getline(is, emp.egn);
+    is >> emp.experience;
+    is >> emp.workHours;
+    is.ignore(); // To ignore the newline character
+
+    // Read the projects (assuming each project is a single line)
+    string project;
+    while (getline(is, project)) {
+        if (project.empty()) break;  // Break if an empty line is encountered (or use another termination condition)
+        emp.projects.push_back(project);
+    }
+
+    // Optionally set the department pointer if needed
+    // Assuming we have a way to set the department (e.g., matching by name)
+
+    return is;
+}
+
+
 ostream& operator<<(ostream& os, const Employee& emp) {
-    os << "Employee Name: " << emp.name << "\n"
-        << "EGN: " << emp.egn << "\n"
-        << "Experience: " << emp.experience << " years\n"
-        << "Work Hours: " << emp.workHours << " hours\n"
+    os << "Employee Name: " << emp.getName() << "\n"
+        << "EGN: " << emp.getEgn() << "\n"
+        << "Experience: " << emp.getExperience() << " years\n"
+        << "Work Hours: " << emp.getWorkHours() << " hours\n"
         << "Projects: ";
-    for (const auto& project : emp.projects) {
+    for (const auto& project : emp.getProjects()) {
         os << project << ", ";
     }
     os << "\n";
-    if (emp.department) {
-        os << "Department: " << emp.department->getName() << "\n";
+    if (emp.getDepartment()) {
+        os << "Department: " << emp.getDepartment()->getName() << "\n";
     }
     return os;
 }

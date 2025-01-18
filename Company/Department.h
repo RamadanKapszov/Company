@@ -11,7 +11,7 @@ private:
     string name;
     int employeeCount;
     int yearsActive;
-    vector<Employee*> employees; // Now holds pointers to employees
+    vector<Employee*> employees; 
 
 public:
     Department();
@@ -24,9 +24,11 @@ public:
 
     void setName(const string& name);
     void setYearsActive(int yearsActive);
-    void addEmployee(Employee* employee); // New method to add employees
+    void addEmployee(Employee* employee); 
 
     friend ostream& operator<<(ostream& os, const Department& dept);
+    friend istream& operator>>(istream& is, Department& dept);
+
 };
 
 #endif

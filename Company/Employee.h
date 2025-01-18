@@ -40,6 +40,8 @@ public:
     void validateData();
 
     friend ostream& operator<<(ostream& os, const Employee& emp);
+    friend istream& operator>>(istream& is, Employee& emp);
+
 };
 
 #endif
